@@ -1,0 +1,109 @@
+<div class="p-4">
+    <!-- Section for Now Showing -->
+    <h2 class="text-xl font-bold mb-4">À l'affiche au cinéma</h2>
+    <div class="relative">
+        <!-- Left Arrow -->
+        <button
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full shadow-md hover:bg-gray-900 z-10"
+            (click)="scrollLeft('nowShowingScroll')">
+            &#8592;
+        </button>
+
+        <!-- Movie List (Scrollable) -->
+        <div id="nowShowingScroll" class="flex overflow-x-auto space-x-4 scrollbar-hide">
+            <div *ngFor="let seance of seances" class="movie-card flex-shrink-0 w-48 relative">
+                <!-- Movie Poster -->
+                <img src="assets/r6.jpg" [alt]="seance.horaire" class="w-full h-auto rounded-md shadow-lg" />
+                <div class="text-center mt-2 font-medium">{{seance.salleProg?.film?.nom}}</div>
+
+                <!-- Reserve Button -->
+                <button class="block w-full bg-blue-600 text-white py-2 mt-2 rounded-md hover:bg-blue-800 shadow-lg"
+                    (click)="showDialogDebiter(seance)">
+                    Réserver
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Arrow -->
+        <button
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full shadow-md hover:bg-gray-900 z-10"
+            (click)="scrollRight('nowShowingScroll')">
+            &#8594;
+        </button>
+    </div>
+
+    <!-- Section for Coming Soon -->
+    <h2 class="text-xl font-bold mt-8 mb-4">Prochaines sorties au cinéma</h2>
+    <div class="relative">
+        <!-- Left Arrow -->
+        <button
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full shadow-md hover:bg-gray-900 z-10"
+            (click)="scrollLeft('comingSoonScroll')">
+            &#8592;
+        </button>
+
+        <!-- Movie List (Scrollable) -->
+        <div id="comingSoonScroll" class="flex overflow-x-auto space-x-4 scrollbar-hide">
+            <div *ngFor="let seance of seances" class="movie-card flex-shrink-0 w-48 relative">
+                <!-- Movie Poster -->
+                <img src="assets/r6.jpg" [alt]="seance.horaire" class="w-full h-auto rounded-md shadow-lg" />
+                <div class="text-center mt-2 font-medium">{{seance.salleProg?.film?.nom}}</div>
+
+                <!-- Reserve Button -->
+                <button class="block w-full bg-blue-600 text-white py-2 mt-2 rounded-md hover:bg-blue-800 shadow-lg"
+                    (click)="showDialogDebiter(seance)">
+                    Réserver
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Arrow -->
+        <button
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full shadow-md hover:bg-gray-900 z-10"
+            (click)="scrollRight('comingSoonScroll')">
+            &#8594;
+        </button>
+    </div>
+</div>
+
+
+
+
+
+<p-dialog header="Debiter argent" [modal]="true" [(visible)]="reserverVisibilty" [style]="{ width: '25rem' }">
+    <!-- <span class="p-text-secondary block mb-8">donner le password .</span> -->
+    <div class="flex flex-col gap-4 mb-4">
+
+        <div class="flex items-center gap-4">
+            <label for="username" class="font-semibold w-24 center">Tarif film :{{slectedSeance?.tarif}} </label>
+        </div>
+        <div class="flex items-center gap-4">
+            <label for="username" class="font-semibold w-24">Compte nom : </label>
+            <input pInputText id="username" class="flex-auto custom-outline" autocomplete="off"
+                [(ngModel)]="compteName" />
+        </div>
+
+        <div class="flex items-center gap-4">
+            <label for="password" class="font-semibold w-24">Password</label>
+            <div class="relative flex-auto">
+                <input [type]="isPasswordVisible ? 'text' : 'password'" id="password"
+                    class="flex-auto w-full custom-outline" autocomplete="off" [(ngModel)]="password " />
+                <button type="button" (click)="togglePasswordVisibility()"
+                    class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600">
+                    <i [class]="isPasswordVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-end gap-2">
+        <button (click)="reserverVisibilty = false"
+            class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition flex items-center gap-2">
+            <i class="bx bx-x-circle"></i> Cancel
+        </button>
+        <button (click)="reserveMovie()"
+            class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center gap-2">
+            <i class="bx bx-save"></i> RESERVER
+        </button>
+
+    </div>
+</p-dialog>

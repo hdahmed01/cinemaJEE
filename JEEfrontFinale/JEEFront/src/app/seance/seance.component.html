@@ -1,0 +1,156 @@
+<div class="p-6">
+  <!-- Header avec bouton Ajouter -->
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Seances</h2>
+    <p-dialog header="Add Seance" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+      <span class="p-text-secondary block mb-8">Add Seance</span>
+      <div class="flex items-center gap-4 mb-4">
+          <div class="flex flex-col gap-4 mb-4">
+            <div *ngIf="salleprogs.length > 0">
+              <p-button (onClick)="salleprogPanel.toggle($event)" icon="pi pi-calendar-clock" label="Salleprog"></p-button>
+              <p-overlayPanel #salleprogPanel>
+                <div class="card flex justify-center">
+                  <p-listbox
+                    [options]="salleprogs"
+                    [(ngModel)]="selectedSalleProg"
+                    (ngModelChange)="updateCondition()"
+                    optionLabel="id_salleprog"
+                    placeholder="Select Salleprog"
+                    (onClick)="salleprogPanel.toggle($event)">
+                  </p-listbox>
+                </div>
+              </p-overlayPanel>
+            </div>
+            <div class="flex items-center gap-4">
+                <label for="username" class="font-semibold w-24">Seance horaire</label>
+                <!-- <input pInputText id="username" class="flex-auto custom-outline" autocomplete="off" [(ngModel)]="crud.horaire" /> -->
+                <p-calendar 
+                [(ngModel)]="crud.horaire" 
+                dateFormat="dd.mm.yy"
+                [touchUI]="true" 
+                [readonlyInput]="true" />
+            </div>
+            <div class="flex items-center gap-4">
+                <label for="address" class="font-semibold w-24">Seances places</label>
+                <input pInputText id="address" class="flex-auto" autocomplete="off" [(ngModel)]="crud.places" />
+            </div>
+            <div class="flex items-center gap-4">
+                <label for="capacity" class="font-semibold w-24">Seance Tarif Capacite</label>
+                <input pInputText id="capacity" class="flex-auto" autocomplete="off" [(ngModel)]="crud.tarif" />
+            </div>
+          
+          </div>
+
+      </div>
+      <div class="flex justify-end gap-2">
+          <button 
+            (click)="visible = false" 
+            class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition flex items-center gap-2"
+          >
+            <i class="bx bx-x-circle"></i> Cancel
+          </button>
+          <button 
+            (click)="addseance(crud.horaire,crud.places,crud.tarif,selectedSalleProg)" 
+            class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center gap-2" [disabled]="condition"
+          >
+            <i class="bx bx-save"></i> Save
+          </button>
+        </div>
+  </p-dialog>
+  <button (click)="showDialog()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-green-600 transition flex items-center">
+      <i class="bx bx-plus mr-2"></i> Add Seance
+  </button>
+  </div>
+
+  <!-- Tableau -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full border-collapse border border-gray-200">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Image</th>
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">ID</th>
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Places</th>
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Horaire</th>
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Tarif</th>
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">salleProg</th>
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let seance of seances" class="hover:bg-gray-50">
+              <td class="px-6 py-4 border-b border-gray-200">
+                <img src="assets/r6.jpg" alt="Film Image" class="w-16 h-16 rounded">
+              </td>
+              <td class="px-6 py-4 border-b border-gray-200">{{ seance.id_seance }}</td>
+              <td class="px-6 py-4 border-b border-gray-200">{{ seance.places }}</td>
+              <td class="px-6 py-4 border-b border-gray-200">{{ seance.horaire }}</td>
+              <td class="px-6 py-4 border-b border-gray-200">{{ seance.tarif }}</td>
+              <td class="px-6 py-4 border-b border-gray-200">{{ seance.salleProg?.id_salleprog }}</td>
+              <td class="px-6 py-4 border-b border-gray-200">
+                  <!-- Buttons aligned horizontally -->
+                  <div class="flex space-x-4">
+                    <div>
+                      <button (click)="showDialogEdit(seance)"  class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center">
+                        <i class="bx bx-edit mr-2"></i> Edit
+                      </button>
+                      </div>
+                    <!-- Delete Button -->
+                      <div class="flex items-center gap-2">
+                          <span><p-toast></p-toast>
+                          <p-confirmPopup></p-confirmPopup>
+                          <button (click)="confirm2($event,seance.id_seance)"  class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center">
+                              <i class="bx bx-trash mr-2"></i> Delete
+                          </button></span>
+                      </div>
+                    
+                  </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<p-dialog header="Update Seance" [modal]="true" [(visible)]="editvisible" [style]="{ width: '25rem' }">
+  <span class="p-text-secondary block mb-8">Update Seance.</span>
+  <!-- <div class="flex items-center gap-4 mb-4">
+      <label for="username" class="font-semibold w-24">Salle Name</label>
+      <input pInputText id="username" class="flex-auto" autocomplete="off"  [(ngModel)]="salle.nom"/>
+  </div> -->
+  <div class="flex flex-col gap-4 mb-4">
+    <div class="flex items-center gap-4">
+        <label for="username" class="font-semibold w-24">Seance Nombre des places</label>
+        <input pInputText id="username" class="flex-auto custom-outline" autocomplete="off" [(ngModel)]="selectedseance.places" />
+    </div>
+    <div class="flex items-center gap-4">
+        <label for="address" class="font-semibold w-24">Seance Horaire</label>
+        <input pInputText id="address" class="flex-auto" autocomplete="off" [(ngModel)]="selectedseance.horaire" />
+        <!-- <p-calendar 
+        [(ngModel)]="selectedseance.horaire" 
+        dateFormat="dd.mm.yy"
+        [touchUI]="true" 
+        [readonlyInput]="true" /> -->
+    </div>
+    <div class="flex items-center gap-4">
+        <label for="capacity" class="font-semibold w-24">Seance Tarif</label>
+        <input pInputText id="capacity" class="flex-auto" autocomplete="off" [(ngModel)]="selectedseance.tarif" />
+    </div>
+  </div>
+  
+  <div class="flex justify-end gap-2">
+      <button 
+        (click)="editvisible = false" 
+        class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition flex items-center gap-2"
+      >
+        <i class="bx bx-x-circle"></i> Cancel
+      </button>
+      <button 
+        (click)="updateSalle(selectedseance)" 
+        class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center gap-2"
+      >
+        <i class="bx bx-save"></i> Update
+      </button>
+  </div>
+</p-dialog>
+
+
+

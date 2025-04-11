@@ -1,0 +1,69 @@
+<footer class="bg-white py-8 shadow-md">
+  <div class="container mx-auto grid grid-cols-2 lg:grid-cols-5 gap-6">
+    <!-- Movies -->
+    <div>
+      <h3 class="font-bold mb-3 text-gray-800">Movies</h3>
+      <ul class="space-y-2">
+        <li><a routerLink="/now-showing" class="text-gray-600 hover:text-purple-600">Now Showing</a></li>
+        <li><a routerLink="/coming-soon" class="text-gray-600 hover:text-purple-600">Coming Soon</a></li>
+        <li><a routerLink="/top-rated" class="text-gray-600 hover:text-purple-600">Top Rated</a></li>
+        <li><a routerLink="/genres" class="text-gray-600 hover:text-purple-600">Genres</a></li>
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div>
+      <h3 class="font-bold mb-3 text-gray-800">Services</h3>
+      <ul class="space-y-2">
+        <li><a routerLink="/ticket-booking" class="text-gray-600 hover:text-purple-600">Ticket Booking</a></li>
+        <li><a routerLink="/streaming" class="text-gray-600 hover:text-purple-600">On-Demand Streaming</a></li>
+        <li><a routerLink="/notfound" class="text-gray-600 hover:text-purple-600">Loyalty Program</a></li>
+        <li><a routerLink="/events" class="text-gray-600 hover:text-purple-600">Special Events</a></li>
+      </ul>
+    </div>
+    
+    <!-- About -->
+    <div>
+      <h3 class="font-bold mb-3 text-gray-800">About Us</h3>
+      <ul class="space-y-2">
+        <li><a routerLink="/about" class="text-gray-600 hover:text-purple-600">Our Story</a></li>
+        <li><a routerLink="/blog" class="text-gray-600 hover:text-purple-600">Blog</a></li>
+        <li><a routerLink="/careers" class="text-gray-600 hover:text-purple-600">Careers</a></li>
+        <li><a routerLink="/contact" class="text-gray-600 hover:text-purple-600">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal -->
+    <div>
+      <h3 class="font-bold mb-3 text-gray-800">Legal</h3>
+      <ul class="space-y-2">
+        <li><a routerLink="/privacy-policy" class="text-gray-600 hover:text-purple-600">Privacy Policy</a></li>
+        <li><a routerLink="/terms" class="text-gray-600 hover:text-purple-600">Terms of Service</a></li>
+        <li><a routerLink="/refund-policy" class="text-gray-600 hover:text-purple-600">Refund Policy</a></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div>
+      <h3 class="font-bold mb-3 text-gray-800">Subscribe to our Newsletter</h3>
+      <p class="text-gray-600 mb-4">Stay updated with the latest movies, events, and promotions.</p>
+      <div class="flex">
+        <input type="email" placeholder="Enter your email" class="p-2 border border-gray-300 rounded-l-lg w-full" [(ngModel)]="email" />
+        <button (click)="subscribe()" class="bg-indigo-600 text-white px-4 py-2 rounded-r-lg">Subscribe</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="border-t mt-8 pt-6">
+    <div class="container mx-auto flex justify-between items-center">
+      <p class="text-gray-600">&copy; 2024 CineWorld, Inc. All rights reserved.</p>
+      <div class="flex space-x-4">
+        <a href="https://www.facebook.com" class="text-gray-500 hover:text-indigo-600"><i class='bx bxl-facebook'></i></a>
+        <a href="https://www.x.com" class="text-gray-500 hover:text-indigo-600"><i class='bx bxl-twitter'></i></a>
+        <a href="https://www.instagram.com" class="text-gray-500 hover:text-indigo-600"><i class='bx bxl-instagram'></i></a>
+        <a href="https://www.youtube.com" class="text-gray-500 hover:text-indigo-600"><i class='bx bxl-youtube'></i></a>
+      </div>
+    </div>
+  </div>
+</footer>

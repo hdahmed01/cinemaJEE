@@ -1,0 +1,22 @@
+<div class="grid grid-cols-1 md:grid-cols-2 h-screen">
+    <!-- Left Section with 404 message and navigation links -->
+    <div class="bg-white p-8 flex flex-col justify-between">
+      <div>
+        <img src="assets/n3.jpg" alt="Logo" class="h-8 mb-8 rounded-full w-24 h-24 object-cover">
+        <div class="text-4xl font-bold text-gray-800 mb-2">404</div>
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Page not found</h1>
+        <p class="text-gray-600">Sorry, we couldn't find the page you're looking for.</p>
+  
+        <div class="mt-6">
+          <a routerLink="/home" class="text-purple-600 hover:underline flex items-center mb-2">
+            <i class="bx bx-left-arrow-alt mr-2"></i> Back to home
+          </a>
+          <a routerLink="/contact" class="text-gray-600 hover:underline mr-4 mb-2">Contact support</a>
+          <a routerLink="/notfound" class="text-gray-600 hover:underline">Status</a> 
+        </div>
+      </div>
+    </div>
+  
+    <!-- Right Section with background image -->
+    <div class="bg-cover bg-center" style="background-image: url('assets/n3.jpg')"></div>
+  </div>

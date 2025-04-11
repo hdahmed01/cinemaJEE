@@ -1,0 +1,107 @@
+<div class="p-6">
+    <!-- Header avec bouton Ajouter -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold">Salleprog</h2>
+      <p-dialog header="Add salleprog" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+        <span class="p-text-secondary block mb-8">Add Salleprog</span>
+        <div class="flex items-center gap-4 mb-4">
+            <div>
+              <div *ngIf="films.length > 0">
+                <p-button (onClick)="filmPanel.toggle($event)" icon="pi pi-video" label="Films"></p-button>
+                <p-overlayPanel #filmPanel>
+                  <div class="card flex justify-center">
+                    <p-listbox
+                      [options]="films"
+                      [(ngModel)]="selectedfilm"
+                      (ngModelChange)="updateCondition()"
+                      optionLabel="nom"
+                      placeholder="Select film"
+                      (onClick)="filmPanel.toggle($event)">
+                    </p-listbox>
+                  </div>
+                </p-overlayPanel>
+              </div>
+              <div *ngIf="films.length === 0">Il n'y a aucun film</div>
+            </div>
+            
+            <div>
+              <div *ngIf="sal.length > 0">
+                <p-button (onClick)="sallePanel.toggle($event)" icon="pi pi-shop" label="Salles"></p-button>
+                <p-overlayPanel #sallePanel>
+                  <div class="card flex justify-center">
+                    <p-listbox
+                      [options]="sal"
+                      [(ngModel)]="selectedsalle"
+                      (ngModelChange)="updateCondition()"
+                      optionLabel="nom"
+                      placeholder="Select salle"
+                      (onClick)="sallePanel.toggle($event)">
+                    </p-listbox>
+                  </div>
+                </p-overlayPanel>
+              </div>
+              <div *ngIf="sal.length === 0">Il n'y a aucune salle</div>
+            </div>
+        </div>
+        <div class="flex justify-end gap-2">
+            <button 
+              (click)="visible = false" 
+              class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition flex items-center gap-2"
+            >
+              <i class="bx bx-x-circle"></i> Cancel
+            </button>
+            <button 
+              (click)="addsalleprog(selectedfilm,selectedsalle)" 
+              class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center gap-2" [disabled]="condition"
+            >
+              <i class="bx bx-save"></i> Save
+            </button>
+          </div>
+    </p-dialog>
+    <button (click)="showDialog()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-green-600 transition flex items-center">
+        <i class="bx bx-plus mr-2"></i> Add Salleprog
+    </button>
+    </div>
+  
+    <!-- Tableau -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full border-collapse border border-gray-200">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Image</th>
+            <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">ID</th>
+            <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Nom Film</th>
+            <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Nom Salle</th>
+            <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let salle of salles" class="hover:bg-gray-50">
+                <td class="px-6 py-4 border-b border-gray-200">
+                  <img src="assets/r6.jpg" alt="Film Image" class="w-16 h-16 rounded">
+                </td>
+                <td class="px-6 py-4 border-b border-gray-200">{{ salle.id_salleprog }}</td>
+                <td class="px-6 py-4 border-b border-gray-200">{{ salle.film.nom }}</td>
+                <td class="px-6 py-4 border-b border-gray-200">{{ salle.salle.nom }}</td>
+                <td class="px-6 py-4 border-b border-gray-200">
+                    <!-- Buttons aligned horizontally -->
+                    <div class="flex space-x-4">
+                      <!-- Delete Button -->
+                        <div class="flex items-center gap-2">
+                            <span><p-toast></p-toast>
+                            <p-confirmPopup></p-confirmPopup>
+                            <button (click)="confirm2($event,salle.id_salleprog)"  class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center">
+                                <i class="bx bx-trash mr-2"></i> Delete
+                            </button></span>
+                        </div>
+                      
+                    </div>
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+  
+  

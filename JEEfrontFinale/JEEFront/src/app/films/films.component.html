@@ -1,0 +1,97 @@
+<div class="p-6">
+  <!-- Header avec bouton Ajouter -->
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Films</h2>
+    <p-dialog header="Add film" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+      <span class="p-text-secondary block mb-8">Add Film.</span>
+      <div class="flex items-center gap-4 mb-4">
+          <label for="username" class="font-semibold w-24">Film Name</label>
+          <input pInputText id="username" class="flex-auto" autocomplete="off"  [(ngModel)]="filmName"/>
+      </div>
+      <div class="flex justify-end gap-2">
+          <button 
+            (click)="visible = false" 
+            class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition flex items-center gap-2"
+          >
+            <i class="bx bx-x-circle"></i> Cancel
+          </button>
+          <button 
+            (click)="addFilm(filmName)" 
+            class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center gap-2"
+          >
+            <i class="bx bx-save"></i> Save
+          </button>
+        </div>
+  </p-dialog>
+  <button (click)="showDialog()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-green-600 transition flex items-center">
+      <i class="bx bx-plus mr-2"></i> Add Film
+  </button>
+  </div>
+
+  <!-- Tableau -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full border-collapse border border-gray-200">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Image</th>
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">ID</th>
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Nom</th>
+          <th class="text-left px-6 py-3 border-b border-gray-200 font-semibold text-gray-700">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let film of films" class="hover:bg-gray-50">
+              <td class="px-6 py-4 border-b border-gray-200">
+                <img src="assets/R.jpg" alt="Film Image" class="w-16 h-16 rounded">
+              </td>
+              <td class="px-6 py-4 border-b border-gray-200">{{ film.id_film }}</td>
+              <td class="px-6 py-4 border-b border-gray-200">{{ film.nom }}</td>
+              <td class="px-6 py-4 border-b border-gray-200">
+                  <!-- Buttons aligned horizontally -->
+                  <div class="flex space-x-4">
+                    <!-- Edit Button -->
+                    <div>
+                    <button (click)="showDialogEdit(film)"  class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center">
+                      <i class="bx bx-edit mr-2"></i> Edit
+                    </button>
+                    
+                    </div>
+                    <!-- Delete Button -->
+                      <div class="flex items-center gap-2">
+                          <span><p-toast></p-toast>
+                          <p-confirmPopup></p-confirmPopup>
+                          <button (click)="confirm2($event,film.id_film)"  class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center">
+                              <i class="bx bx-trash mr-2"></i> Delete
+                          </button></span>
+                      </div>
+                    
+                  </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<p-dialog header="Update Film" [modal]="true" [(visible)]="editvisible" [style]="{ width: '25rem' }">
+  <span class="p-text-secondary block mb-8">Update Film.</span>
+  <div class="flex items-center gap-4 mb-4">
+      <label for="username" class="font-semibold w-24">Film Name</label>
+      <input pInputText id="username" class="flex-auto" autocomplete="off"  [(ngModel)]="selectedFilm.nom"/>
+  </div>
+  <div class="flex justify-end gap-2">
+      <button 
+        (click)="editvisible = false" 
+        class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition flex items-center gap-2"
+      >
+        <i class="bx bx-x-circle"></i> Cancel
+      </button>
+      <button 
+        (click)="updateFilm(selectedFilm)" 
+        class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center gap-2"
+      >
+        <i class="bx bx-save"></i> Update
+      </button>
+  </div>
+</p-dialog>
+
+

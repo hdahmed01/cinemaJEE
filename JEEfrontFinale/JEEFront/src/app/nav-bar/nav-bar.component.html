@@ -1,0 +1,66 @@
+<p-toast></p-toast>
+<nav class="bg-white shadow-md">
+  <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+    <div class="flex items-center">
+      <!-- Logo -->
+      <img src="assets/r2.jpg" alt="Logo" class="h-20 w-20" style="border-radius: 50%;">
+      <!-- Navigation Links -->
+      <div class="ml-10 flex space-x-8">
+        <a routerLink="/home" class="text-gray-800 hover:text-indigo-600 font-medium">Home</a>
+        <a routerLink="/reserver" class="text-gray-800 hover:text-indigo-600 font-medium">Reserver</a>
+        <a *ngIf="isLoggedIn" routerLink="/films" class="text-gray-800 hover:text-indigo-600 font-medium">Films</a>
+        <a *ngIf="isLoggedIn" routerLink="/seances" class="text-gray-800 hover:text-indigo-600 font-medium">Seances</a>
+        <a *ngIf="isLoggedIn" routerLink="/salle" class="text-gray-800 hover:text-indigo-600 font-medium">Salle</a>
+        <a *ngIf="isLoggedIn" routerLink="/salleprog" class="text-gray-800 hover:text-indigo-600 font-medium">Salleprog</a>
+        <a *ngIf="isLoggedIn" routerLink="/compte" class="text-gray-800 hover:text-indigo-600 font-medium">Compte</a>
+        <a routerLink="/about" class="text-gray-800 hover:text-indigo-600 font-medium">About Us</a>
+        <a routerLink="/contact" class="text-gray-800 hover:text-indigo-600 font-medium">Contact</a>
+      </div>
+    </div>
+
+    <!-- Right-side Buttons -->
+    <div class="flex items-center space-x-4">
+      <!-- Show login button if not logged in -->
+      <button *ngIf="!isLoggedIn" (click)="showDialog()" class="text-gray-800 hover:text-indigo-600 font-medium px-4 py-2 bg-indigo-500 text-white rounded">Login</button>
+
+      <!-- Show notification and user avatar if logged in -->
+      <div *ngIf="isLoggedIn" class="flex items-center space-x-4">
+        <!-- Notification Bell -->
+        <button class="text-gray-500 hover:text-indigo-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m0 0v1a3 3 0 006 0v-1m-6 0h6"></path>
+          </svg>
+        </button>
+        <!-- User Avatar -->
+        <img src="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" class="h-10 w-10 rounded-full" />
+        <!-- Logout Button -->
+        <button (click)="logout()" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition flex items-center gap-2">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>
+<p-dialog header="Login" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+  <span class="p-text-secondary block mb-8">Login</span>
+  <div class="flex items-center gap-4 mb-4">
+      <label for="username" class="font-semibold w-24">User Name</label>
+      <input pInputText id="username" class="flex-auto" autocomplete="off"  [(ngModel)]="name"/>
+  </div>
+  <div class="flex items-center gap-4 mb-4">
+    <label for="username" class="font-semibold w-24">Password</label>
+    <input pInputText id="password" [type]="isPasswordVisible ? 'text' : 'password'" class="flex-auto" autocomplete="off"  [(ngModel)]="password"/>
+</div>
+  <div class="flex justify-end gap-2">
+      <button 
+        (click)="visible = false" 
+        class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition flex items-center gap-2"
+      >
+        <i class="bx bx-x-circle"></i> Cancel
+      </button>
+      <button 
+        (click)="login()" 
+        class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center gap-2"
+      >
+        <i class="bx bx-save"></i> Login
+      </button>
+    </div>
+</p-dialog>

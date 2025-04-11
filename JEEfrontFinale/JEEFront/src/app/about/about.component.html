@@ -1,0 +1,99 @@
+<div class="container mx-auto px-4 py-10">
+
+  <section class="mb-16">
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Everything You Need to Enjoy the Movies</h2>
+    <p class="text-gray-600">
+      From booking tickets to discovering the latest blockbusters, our app brings the ultimate movie experience to your fingertips.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+      <div class="flex items-start">
+        <i class="bx bx-movie-play text-4xl text-purple-600 mr-4"></i> 
+        <div>
+          <h3 class="text-lg font-medium text-gray-800">Latest Blockbusters</h3>
+          <p class="text-gray-600">Stay updated with the hottest releases, exclusive premieres, and trending movies from around the world.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start">
+        <i class="bx bx-chair text-4xl text-purple-600 mr-4"></i>
+        <div>
+          <h3 class="text-lg font-medium text-gray-800">Comfortable Seating</h3>
+          <p class="text-gray-600">Choose the best seats in the house with our seamless seat selection interface.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start">
+        <i class="bx bx-ticket text-4xl text-purple-600 mr-4"></i>
+        <div>
+          <h3 class="text-lg font-medium text-gray-800">Instant Ticket Booking</h3>
+          <p class="text-gray-600">Book your tickets effortlessly and get instant confirmation with digital e-tickets.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start">
+        <i class="bx bx-tv text-4xl text-purple-600 mr-4"></i>
+        <div>
+          <h3 class="text-lg font-medium text-gray-800">Home Streaming</h3>
+          <p class="text-gray-600">Enjoy on-demand movies and exclusive content directly from your app.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Team</h2>
+    <p class="text-gray-600">
+      Meet the passionate individuals behind our app, dedicated to delivering the best movie experience.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+      <p-card *ngFor="let member of teamMembers" styleClass="shadow-none border-none transform transition-transform duration-300 hover:scale-105">
+        <img [src]="member.image" alt="{{ member.name }}" class="w-full h-48 object-cover mb-4">
+        <h3 class="text-lg font-medium text-gray-800">{{ member.name }}</h3>
+        <p class="text-gray-600 text-sm">{{ member.role }}</p>
+        <div class="flex items-center mt-2">
+          <i class="bx bxl-linkedin text-xl text-gray-600 mr-2"></i>
+        </div>
+      </p-card>
+    </div>
+
+    <div class="container mx-auto px-4 py-10">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Partners</h2>
+      <div class="flex flex-wrap justify-center items-center gap-8">
+        <div class="flex items-center">
+          <i class="bx bxs-film text-purple-600 text-4xl mr-2"></i>
+          <span class="text-xl font-medium text-gray-800">Movie Studios</span>
+        </div>
+
+        <div class="flex items-center">
+          <i class="bx bxs-factory text-purple-600 text-4xl mr-2"></i>
+          <span class="text-xl font-medium text-gray-800">Cinema Chains</span>
+        </div>
+
+        <div class="flex items-center">
+          <i class="bx bxs-cog text-purple-600 text-4xl mr-2"></i>
+          <span class="text-xl font-medium text-gray-800">Streaming Platforms</span>
+        </div>
+
+        <div class="flex items-center">
+          <i class="bx bxs-calendar-alt text-purple-600 text-4xl mr-2"></i>
+          <span class="text-xl font-medium text-gray-800">Event Organizers</span>
+        </div>
+
+        <div class="flex items-center">
+          <i class="bx bxs-chart text-purple-600 text-4xl mr-2"></i>
+          <span class="text-xl font-medium text-gray-800">Analytics Partners</span>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <p class="text-gray-600">
+          <a href="#" class="text-purple-600 font-medium hover:underline">Read more</a>
+          <i class="bx bx-right-arrow-alt ml-1"></i>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div>
